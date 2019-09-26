@@ -1,8 +1,9 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Module Docstring
 """
-from negative_image import NegativeImage
+from src.mirror_img import MirrorImage
+from src.negative_img import NegativeImage
 
 __author__ = "Armend Ukehaxhaj"
 __version__ = "0.1.0"
@@ -96,21 +97,17 @@ def main():
 
     # Read the image
     logger.info("Loading selected image")
-    img = mpimg.imread("lena.png")
+    img = mpimg.imread("../res/lena.png")
 
     # Generate and show negative image
     logger.info("Processing the negative image")
-    first_transformation = NegativeImage(img)
-    first_transformation.create_and_show_img()
+    neg_img_trans = NegativeImage(img)
+    neg_img_trans.create_and_show_img()
 
-    # ============= Mirroring image ===============
-    img_mirror = np.fliplr(img)  # flipping image left to right
-
-    fig, (axe1, axe2) = plt.subplots(1, 2)
-    fig.suptitle("Flipped image left to right")
-    axe1.imshow(img, cmap="gray")
-    axe2.imshow(img_mirror, cmap="gray")
-    plt.show()
+    # Generate and show mirrored image
+    logger.info("Loading the mirrored image")
+    mirr_img_trans = MirrorImage(img)
+    mirr_img_trans.create_and_show_img()
 
     # ============= Add/Substraction of image =====
     random_value = randint(0, 256)  # generate a random value between 0, 256 (doesn't get the higher limit)
