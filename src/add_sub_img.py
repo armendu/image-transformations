@@ -8,13 +8,17 @@ class AddAndSubImage:
         self.image = image
 
     def create_and_show_img(self):
-        random_value = randint(0, 256)  # generate a random value between 0, 256 (doesn't get the higher limit)
-        img_transformed_pixels = transform_pixels(self.image,
-                                                  random_value)  # by default add, random_value to everypixel in the image
-        clipped_image = clip_img(img_transformed_pixels, 0, 255)  # clip image to have minimum 0 and maximum 255
+        # Generate random number from 0 to 255
+        random_value = randint(0, 256)
+
+        # Transform pixels
+        img_transformed_pixels = transform_pixels(self.image, random_value)
+
+        # Clip image to have minimum 0 and maximum 255
+        clipped_image = clip_img(img_transformed_pixels, 0, 255)
 
         fig, (axe1, axe2) = plt.subplots(1, 2)
-        fig.suptitle(f"Add/Substraction and Clipped image by {random_value}")
+        fig.suptitle(f"Subtraction and Clipping of image by {random_value}")
         axe1.imshow(self.image, cmap="gray")
         axe2.imshow(clipped_image, cmap="gray")
         plt.show()
@@ -32,14 +36,13 @@ def transform_pixels(image, value, is_addition=False):
     return transformed_image
 
 
-def clip_img(image, minVal, maxVal):
-    # Clip every pixel in the image to be between minVal and maxVal
-
+def clip_img(image, min_value, max_value):
+    # Clip every pixel in the image to be between min_value and max_value
     for i in range(0, image.shape[0]):
         for j in range(0, image.shape[1]):
-            if image[i, j] < minVal:  # If the current pixel is less than minVal 
-                image[i, j] += maxVal  # Add the minVal
-            elif image[i, j] > maxVal:  # else if the current pixel is greater than maxVal
-                image[i, j] -= maxVal  # Subtract the maxVal
+            if image[i, j] < min_value:
+                image[i, j] += max_value
+            elif image[i, j] > max_value:
+                image[i, j] -= max_value
 
     return image

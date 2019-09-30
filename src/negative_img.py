@@ -11,14 +11,17 @@ class NegativeImage:
         self.show_negative_img(negative_image)
 
     def get_negative_img(self):
-        x, y = self.image.shape  # Size of the image
-        negative = np.zeros((x, y))  # Create an matrix of the same size filled with zeros
+        # Get the size of the image
+        x, y = self.image.shape
+
+        # Create an matrix of the same size filled with zeros
+        negative = np.zeros((x, y))
 
         # For every pixel of the image subtract 255
         for i in range(0, x):
             for j in range(0, y):
                 negative[i, j] = 255 - int(255 * self.image[
-                    i, j])  # Since image has values between 0 and 1, this multiplication is done to translate to the range between 0 and 255
+                    i, j])
 
         return negative
 

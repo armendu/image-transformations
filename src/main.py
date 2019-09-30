@@ -4,7 +4,6 @@ Module Docstring
 """
 from src.add_sub_img import AddAndSubImage
 from src.gen_histogram_img import GenerateHistogram
-from src.low_res_img import LowResImage
 from src.mirror_img import MirrorImage
 from src.negative_img import NegativeImage
 
@@ -19,17 +18,17 @@ import matplotlib.image as mpimg
 
 def applyThreshold(image, threshold):
     x, y = image.shape
-    thresholdedImage = np.zeros((x, y))
+    thresholded_image = np.zeros((x, y))
 
     # Pixels above the threshold are replaced by 0
     for i in range(0, x):
         for j in range(0, y):
             if image[i, j] > threshold:
-                thresholdedImage[i, j] = 0
+                thresholded_image[i, j] = 0
             else:
-                thresholdedImage[i, j] = image[i, j]
+                thresholded_image[i, j] = image[i, j]
 
-    return thresholdedImage
+    return thresholded_image
 
 
 def main():
@@ -59,28 +58,6 @@ def main():
     logger.info("Loading the generated histogram")
     gen_histogram = GenerateHistogram(img)
     gen_histogram.create_and_show_img()
-
-    # Generate and show Low Resolution image
-    logger.info("Loading the low resolution image")
-    low_res = LowResImage(img)
-    low_res.create_and_show_img()
-
-# ================= Segment the face of Lena ===================
-#     while True:
-#         threshold = input("Type the threshold(0 to 255)<type exit to break>: ")  # Get the threshold from the client
-# 
-#         # If client doesn't want to exit apply the threshold to the image
-#         if "exit" not in threshold:
-#             thresholded_image = applyThreshold(low_resolution_image, int(threshold))  # Applying the threshold
-# 
-#             # Show the calculated results
-#             fig, (axe1, axe2) = plt.subplots(1, 2)
-#             fig.suptitle(f"Thresholded image by {int(threshold)}")
-#             axe1.imshow(low_resolution_image, cmap='gray')
-#             axe2.imshow(thresholded_image, cmap='gray')
-#             plt.show(block=True)
-#         else:
-#             break
 
 
 if __name__ == "__main__":

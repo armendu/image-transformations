@@ -3,7 +3,7 @@
 
 class CommonTransformations:
     def break_image(self, image, blocks=16):
-        blocked_image = np.zeros((blocks, blocks), dtype=object)  # Initialization
+        blocked_image = np.zeros((blocks, blocks), dtype=object)
 
         x_split_by_percentage = image.shape[0] // blocks  # Get the size of x axis
         y_split_by_percentage = image.shape[1] // blocks  # Get the size of y axis
